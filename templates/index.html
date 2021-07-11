@@ -1,9 +1,5 @@
 Weekly Meal Planner <br/><br/>
 
-Monday - <br/>
-Tuesday - <br/>
-Wednesday - <br/>
-Thursday - <br/>
-Friday - <br/>
-Saturday - <br/>
-Sunday - <br/>
+{% for key in data %}
+    {{ key }} - {{ data[key] }}<br/>
+{% endfor %}

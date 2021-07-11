@@ -1,14 +1,21 @@
-from flask import Flask, render_template
-from flask_cors import CORS
+import json
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
-app.debug = True
-CORS(app)
+
+
+@app.route('/data')
+def data():
+    with open('data/meals.json', 'r') as j:
+        meals = json.loads(j.read())
+    return jsonify(meals)
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    with open('data/meals.json', 'r') as j:
+        meals = json.loads(j.read())
+    return render_template('index.html', data=meals)
 
 
 if __name__ == '__main__':
