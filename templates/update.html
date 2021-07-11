@@ -1,0 +1,10 @@
+Current Meal for {{ data['day'] }}:
+
+{{ data['meal'] }}
+
+<form action="{{ url_for('update_meal') }}" method="post">
+    <input type="hidden" id="update_key" name="day" value="{{ data['day'] }}">
+    <label for="update_value">New Meal: </label>
+    <input type="text" id="update_value" name="meal">
+    <input type="submit" value="Update">
+</form>

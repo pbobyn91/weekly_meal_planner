@@ -1,5 +1,23 @@
 Weekly Meal Planner <br/><br/>
 
+<table>
 {% for key in data %}
-    {{ key }} - {{ data[key] }}<br/>
+    <tr>
+        <td>{{ key }}</td>
+        <td>{{ data[key] }}</td>
+        <td>
+            <form action="{{ url_for('update') }}" method="post">
+                <input type="hidden" id="update_key" name="key" value="{{ key }}">
+                <input type="hidden" id="update_value" name="value" value="{{ data[key] }}">
+                <input type="submit" value="Update">
+            </form>
+        </td>
+        <td>
+            <form action="{{ url_for('delete') }}" method="post">
+                <input type="hidden" id="delete_key" name="key" value="{{ key }}">
+                <input type="submit" value="Delete">
+            </form>
+        </td>
+    </tr>
 {% endfor %}
+</table>
