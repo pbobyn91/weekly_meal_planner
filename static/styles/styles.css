@@ -1,12 +1,48 @@
 body {
     background-color: powderblue;
-    font-size: 30px;
-    font-color: black;
+    font-size: 50px;
 }
 
 table {
-    font-family: verdana;
-    font-size: 20px;
-    font-color: black;
-    background-size: cover;
+    width: 100%;
+    text-align: center;
+}
+
+td {
+    height: 60px;
+    font-size: 10px;
+}
+
+input[type="submit"] {
+    font-size: 10px;
+}
+
+@media only screen and (min-width: 600px) {
+    body {
+        font-size: 60px;
+    }
+
+    td {
+        height: 70px;
+        font-size: 15px;
+    }
+
+    input[type="submit"] {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    body {
+        font-size: 70px;
+    }
+
+    td {
+        height: 80px;
+        font-size: 20px;
+    }
+
+    input[type="submit"] {
+        font-size: 20px;
+    }
 }
