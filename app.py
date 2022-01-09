@@ -8,7 +8,7 @@ path = os.environ.get('MEAL_PATH', None)
 if path:
     meals_path = os.path.join(path, 'weekly_meal_planner', 'data', 'meals.json')
 else:
-    meals_path = os.path.join(os.path.realpath(__file__), '..', 'data', 'meals.json')
+    meals_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'meals.json')
 
 
 @app.route('/data')
