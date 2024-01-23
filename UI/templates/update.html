@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+</head>
 Current Meal for {{ data['day'] }}:
 
 {{ data['meal'] }}
@@ -8,3 +13,4 @@ Current Meal for {{ data['day'] }}:
     <input type="text" id="update_value" name="meal">
     <input type="submit" value="Update">
 </form>
+</html>
