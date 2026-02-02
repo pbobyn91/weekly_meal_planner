@@ -29,6 +29,7 @@ jobs:
     - name: Run Java tests
       run: |
         cd java/meal-planner-backend
+        chmod +x ./mvnw
         ./mvnw test
 
   test-csharp:
