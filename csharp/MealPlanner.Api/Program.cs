@@ -1,15 +1,32 @@
+using MealPlanner.Core.Interfaces;
+using MealPlanner.Infrastructure.Repositories;
+using MealPlanner.Infrastructure.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Add services
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add CORS for Angular frontend
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")  // Angular default port
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+// Register dependencies
+builder.Services.AddSingleton<IMealRepository, MealRepository>();
+builder.Services.AddScoped<IMealService, MealService>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -18,7 +35,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+// Enable CORS
+app.UseCors("AllowAngular");
 
 app.MapControllers();
 
