@@ -1,0 +1,59 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-java:
+    runs-on: ubuntu-latest
+    name: Java Tests
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        
+    - name: Cache Maven dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        
+    - name: Run Java tests
+      run: |
+        cd java/meal-planner-backend
+        ./mvnw test
+
+  test-csharp:
+    runs-on: ubuntu-latest
+    name: C# Tests
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Restore dependencies
+      run: |
+        cd csharp
+        dotnet restore
+        
+    - name: Build
+      run: |
+        cd csharp
+        dotnet build --no-restore
+        
+    - name: Test
+      run: |
+        cd csharp
+        dotnet test --no-build --verbosity normal

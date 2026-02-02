@@ -1,2 +1,12 @@
 .devcontainer/
 .gitmodules
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+packages/
+*.nupkg
+.vscode/
